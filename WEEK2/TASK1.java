@@ -1,27 +1,29 @@
-package PSTJ;
-
+package StreamAPI;
 import java.util.*;
 import java.util.stream.*;
-
-public class TASK1 {
+public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        int N = sc.nextInt();
-        List<Integer> list = new ArrayList<>();
-
-        for (int i = 0; i < N; i++) {
-            list.add(sc.nextInt());
+        if (!sc.hasNextInt()) {
+            return;
+        }
+        int n = sc.nextInt();
+        List<Integer> numbers = new ArrayList<>();
+        
+        for (int i = 0; i < n; i++) {
+            if (sc.hasNextInt()) {
+                numbers.add(sc.nextInt());
+            }
         }
 
-        Optional<Integer> secondHighest = list.stream()
+        int result = numbers.stream()
                 .distinct()
                 .sorted(Comparator.reverseOrder())
                 .skip(1)
-                .findFirst();
+                .findFirst()
+                .orElse(-1);
 
-        System.out.println(secondHighest.orElse(-1));
-
+        System.out.println(result);
         sc.close();
     }
 }
